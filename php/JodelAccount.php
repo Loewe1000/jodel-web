@@ -141,7 +141,7 @@ class JodelAccount
                     }
                     else
                     {
-                        error_log('User with JodelDeviceId:' . $this->deviceUid .  ' [' . $_SERVER['REMOTE_ADDR'] . '][' . $_SERVER ['HTTP_USER_AGENT'] . '] changed to Location: ' . $name);
+                        user_log('User with JodelDeviceId:' . $this->deviceUid .  ' [' . $_SERVER['REMOTE_ADDR'] . '][' . $_SERVER ['HTTP_USER_AGENT'] . '] changed to Location: ' . $name);
                     }
                 }
 
@@ -223,6 +223,7 @@ class JodelAccount
             {
                 $accountCreator = new Downvote();
             }
+
             $accountCreator->setAccessToken($this->accessToken);
             $accountCreator->postId = htmlspecialchars($postId);
             $data = $accountCreator->execute();
@@ -234,7 +235,7 @@ class JodelAccount
             }
             else
             {
-                error_log("Could not vote: " . var_dump($data));
+                error_log("Could not vote: " . print_r($data, true));
                 return FALSE;
             } 
         }
@@ -293,6 +294,11 @@ class JodelAccount
         $accountCreatorLocation->setAccessToken($this->accessToken);
         $data = $accountCreatorLocation->execute();
         
+		if($data != 'Success')
+		{
+			error_log(print_r($data, true));
+		}
+
         $accountCreator->location = $this->location;
         
         $accountCreator->setAccessToken($this->accessToken);
@@ -305,7 +311,7 @@ class JodelAccount
         }
         else
         {
-            header('Location: ' . $baseUrl);
+            header('Location: ' . $view->baseUrl);
             exit;
         }
     }

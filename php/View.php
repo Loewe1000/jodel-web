@@ -151,7 +151,7 @@ class View
 						{
 						?>
 						<span class="voting">
-							<a href="admin.php?postId=<?php echo $post['post_id'] ?>">
+							<a target="_blank" href="admin.php?postId=<?php echo $post['post_id'] ?>">
 								<i class="fa fa-thumbs-o-up"></i> Vote
 							</a>
 						</span>
@@ -204,11 +204,11 @@ class View
 	 *
 	 * @return     string  The title.
 	 */
-	function getTitle($post)
+	function getTitle($post = '')
 	{
 		$title = 'JodelBlue - Web-App and Browser-Client';
 
-		if($this->isDetailedView)
+		if($post != '' && $this->isDetailedView)
 		{
 			$title = 'JodelBlue: ' . substr(htmlspecialchars($post['message']), 0, 44);
 		}
@@ -221,11 +221,11 @@ class View
 	 *
 	 * @return     string  The meta description.
 	 */
-	function getMetaDescription($post)
+	function getMetaDescription($post = '')
 	{
 		$description = 'JodelBlue is a Web-App and Browser-Client for the Jodel App. No registration required! Browse Jodels all over the world. Send your own Jodels or upvote others.';
 
-		if($this->isDetailedView)
+		if($post != '' && $this->isDetailedView)
 		{
 			$description = 'On JodelBlue with ' . htmlspecialchars($post['vote_count']) . ' Upvotes: ' . substr(htmlspecialchars($post['message']), 0, 140);
 		}

@@ -4,9 +4,9 @@ abstract class AbstractRequest
 {	
     const CLIENTID = '81e8a76e-1e02-4d17-9ba0-8a7020261b26';
     const APIURL = 'https://api.go-tellm.com/api';
-    const SECRET = 'LDWWpuUigOnKCbCLpoNMDHCqHCWbLKPzHbnIUKIf';
-    const USERAGENT = 'Jodel/4.33.2 Dalvik/2.1.0 (Linux; U; Android 5.1.1; )';
-    const CLIENT_TYPE = 'android_4.33.2';
+    const SECRET = 'SDydTnTdqqaiAMfneLkqXYxamvNuUYOmkqpdiZTu';
+    const USERAGENT = 'Jodel/4.34.2 Dalvik/2.1.0 (Linux; U; Android 5.1.1; )';
+    const CLIENT_TYPE = 'android_4.34.2';
     
     private $accessToken = null;
     private $payLoad;
@@ -83,7 +83,9 @@ abstract class AbstractRequest
                 break;
             case 401:
 				//throw new \Exception('Unauthorized');
+                error_log(print_r($header, true));
                 error_log('Error 401 - Unauthorized'); // - JodelDeviceId:' . $deviceUid);
+                error_log(print_r($result, true));
                 break;
             case 404:
                 //echo "Es wurde bereits gevoted";
